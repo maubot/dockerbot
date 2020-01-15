@@ -1,0 +1,10 @@
+maubot: 0.1.0
+id: xyz.maubot.dockerbot
+version: 0.1.0
+license: AGPL-3.0-or-later
+modules:
+- dockerbot
+main_class: DockerBot
+config: false
+database: false
+extra_files: []
