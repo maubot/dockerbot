@@ -36,7 +36,7 @@ build docker:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CI_REGISTRY_IMAGE:latest || true
-    - docker build --pull --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA . -f supportportal/standalone/Dockerfile
+    - docker build --pull --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA . -f $CI_PROJECT_NAME/standalone/Dockerfile
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
 push latest:
