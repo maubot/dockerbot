@@ -8,6 +8,8 @@ user:
     displayname: Docker Bot
     avatar_url: mxc://maunium.net/gHodUFiAfViBqcdxfoBoPYxN
 
+database: sqlite:///database.db
+
 logging:
     version: 1
     formatters:
