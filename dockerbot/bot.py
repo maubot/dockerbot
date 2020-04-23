@@ -58,17 +58,16 @@ class DockerBot(Plugin):
     @command.argument("name", label="container name")
     @command.argument("timeout", parser=optional_int, required=False)
     async def restart(self, evt: MessageEvent, name: str, timeout: Optional[int] = None) -> None:
-        containers = await self.docker.containers.list(all=True)
-        name = f"/{name}"
-        container = None
-        for container in containers:
-            if name in container["Names"]:
-                break
-        if not container:
+        containers = await self.docker.containers.list(all=True, filters={
+            "name": [f"{name}"]
+        })
+        if not containers:
             await evt.reply("No container with that name found")
             return
         try:
+            container = containers[0]
             await container.restart(timeout)
-            await evt.reply("Container restarted successfully")
+            id = container["Id"][:12]
+            await evt.reply(f"Container `{id}` restarted successfully")
         except DockerError:
             await evt.reply("Failed to restart container")
